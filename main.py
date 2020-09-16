@@ -1,5 +1,6 @@
 import os
 import random
+import sys
 
 grid = [
     ["    ", "    ", "    "],
@@ -37,6 +38,7 @@ def try_again():
             elif turn == 1:
                 grid[abc.index(input_[1].upper())][int(input_[0])] = "  X "
             occuipied.append([abc.index(input_[1].upper()), int(input_[0])])
+            check_if_win()
             next_pp()
     else:
         show()
@@ -46,7 +48,21 @@ def next_pp():
     if turn == 2:
         turn -= 2
     show()
-    
+def win():
+    os.system('cls')
+    print(f"""{people[turn]} won""")
+    input()
+    sys.exit(0)
+def check_if_win():
+    for x in range(0, 3):
+        if grid[x][0] == grid[x][1] == grid[x][2] != "    ":
+            win()
+        elif grid[0][x] == grid[1][x] == grid[2][x] != "    ":
+            win()
+    if grid[0][0] == grid[1][1] ==grid[2][2] != "    ":
+        win()
+    elif grid[0][2] == grid[1][1] == grid[2][0] != "    ":
+        win()
 def start():
     os.system('cls')
     global first_pp
