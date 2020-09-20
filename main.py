@@ -14,6 +14,7 @@ turn = 0
 people = []
 occuipied = []
 abc = ["A", "B", "C"]
+rounds = 0
 def show():
     os.system('cls')
     print(occuipied)
@@ -38,6 +39,8 @@ def try_again():
             elif turn == 1:
                 grid[abc.index(input_[1].upper())][int(input_[0])] = "  X "
             occuipied.append([abc.index(input_[1].upper()), int(input_[0])])
+            global rounds
+            rounds += 1
             check_if_win()
             next_pp()
     else:
@@ -63,6 +66,13 @@ def check_if_win():
         win()
     elif grid[0][2] == grid[1][1] == grid[2][0] != "    ":
         win()
+    if rounds == 9:
+        tie()
+def tie():
+    os.system('cls')
+    print("It is a tie!")
+    input()
+    sys.exit(0)
 def start():
     os.system('cls')
     global first_pp
